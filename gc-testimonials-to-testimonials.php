@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: GC Testimonials to Testimonials by Aihrus
- * Plugin URI: http://wordpress.org/plugins/gc-testimonials-to-testimonials/
- * Description: Migrate GC Testimonials entries to Testimonials by Aihrus custom post types.
+ * Plugin Name: WooTheme Testimonials to Testimonials by Aihrus
+ * Plugin URI: http://wordpress.org/plugins/wootheme-testimonials-to-testimonials/
+ * Description: Migrate WooTheme Testimonials entries to Testimonials by Aihrus custom post types.
  * Version: 1.1.2
  * Author: Michael Cannon
  * Author URI: http://aihr.us/resume/
@@ -24,34 +24,34 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-define( 'GCT2T_AIHR_VERSION', '1.0.1' );
-define( 'GCT2T_BASE', plugin_basename( __FILE__ ) );
-define( 'GCT2T_DIR', plugin_dir_path( __FILE__ ) );
-define( 'GCT2T_DIR_LIB', GCT2T_DIR . '/lib' );
-define( 'GCT2T_NAME', 'GC Testimonials to Testimonials by Aihrus' );
-define( 'GCT2T_REQ_BASE', 'testimonials-widget/testimonials-widget.php' );
-define( 'GCT2T_REQ_NAME', 'Testimonials by Aihrus' );
-define( 'GCT2T_REQ_SLUG', 'testimonials-widget' );
-define( 'GCT2T_REQ_VERSION', '2.17.2' );
-define( 'GCT2T_VERSION', '1.1.2' );
+define( 'WTT2T_AIHR_VERSION', '1.0.1' );
+define( 'WTT2T_BASE', plugin_basename( __FILE__ ) );
+define( 'WTT2T_DIR', plugin_dir_path( __FILE__ ) );
+define( 'WTT2T_DIR_LIB', WTT2T_DIR . '/lib' );
+define( 'WTT2T_NAME', 'WooTheme Testimonials to Testimonials by Aihrus' );
+define( 'WTT2T_REQ_BASE', 'testimonials-widget/testimonials-widget.php' );
+define( 'WTT2T_REQ_NAME', 'Testimonials by Aihrus' );
+define( 'WTT2T_REQ_SLUG', 'testimonials-widget' );
+define( 'WTT2T_REQ_VERSION', '2.17.2' );
+define( 'WTT2T_VERSION', '1.0.0' );
 
-require_once GCT2T_DIR_LIB . '/requirements.php';
+require_once WTT2T_DIR_LIB . '/requirements.php';
 
-if ( ! gct2t_requirements_check() ) {
+if ( ! wtt2t_requirements_check() ) {
 	return false;
 }
 
-require_once GCT2T_DIR_LIB . '/aihrus/class-aihrus-common.php';
-require_once GCT2T_DIR_LIB . '/class-gc-testimonials-to-testimonials-settings.php';
+require_once WTT2T_DIR_LIB . '/aihrus/class-aihrus-common.php';
+require_once WTT2T_DIR_LIB . '/class-wootheme-testimonials-to-testimonials-settings.php';
 
 
-class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
-	const BASE    = GCT2T_BASE;
-	const ID      = 'gc-testimonials-to-testimonials';
-	const SLUG    = 'gct2t_';
-	const VERSION = GCT2T_VERSION;
+class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
+	const BASE    = WTT2T_BASE;
+	const ID      = 'wootheme-testimonials-to-testimonials';
+	const SLUG    = 'wtt2t_';
+	const VERSION = WTT2T_VERSION;
 
-	const GCT_PT = 'testimonial';
+	const WTT_PT = 'testimonial';
 
 	private static $post_types;
 
@@ -79,20 +79,20 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 		add_filter( 'plugin_action_links', array( __CLASS__, 'plugin_action_links' ), 10, 2 );
 		add_filter( 'plugin_row_meta', array( __CLASS__, 'plugin_row_meta' ), 10, 2 );
 
-		self::$settings_link = '<a href="' . get_admin_url() . 'edit.php?post_type=' . Testimonials_Widget::PT . '&page=' . Gc_Testimonials_to_Testimonials_Settings::ID . '">' . __( 'Settings', 'gc-testimonials-to-testimonials' ) . '</a>';
+		self::$settings_link = '<a href="' . get_admin_url() . 'edit.php?post_type=' . Testimonials_Widget::PT . '&page=' . Wootheme_Testimonials_to_Testimonials_Settings::ID . '">' . __( 'Settings', 'wootheme-testimonials-to-testimonials' ) . '</a>';
 	}
 
 
 	public static function admin_menu() {
-		self::$menu_id = add_submenu_page( 'edit.php?post_type=' . Testimonials_Widget::PT, esc_html__( 'GC Testimonials to Testimonials Migrator', 'gc-testimonials-to-testimonials' ), esc_html__( 'GCT Migrator', 'gc-testimonials-to-testimonials' ), 'manage_options', self::ID, array( __CLASS__, 'user_interface' ) );
+		self::$menu_id = add_submenu_page( 'edit.php?post_type=' . Testimonials_Widget::PT, esc_html__( 'WooTheme Testimonials to Testimonials Migrator', 'wootheme-testimonials-to-testimonials' ), esc_html__( 'WTT Migrator', 'wootheme-testimonials-to-testimonials' ), 'manage_options', self::ID, array( __CLASS__, 'user_interface' ) );
 
 		add_action( 'admin_print_scripts-' . self::$menu_id, array( __CLASS__, 'scripts' ) );
 		add_action( 'admin_print_styles-' . self::$menu_id, array( __CLASS__, 'styles' ) );
 
 		add_screen_meta_link(
-			'gct2t_settings_link',
-			esc_html__( 'GC Testimonials to Testimonials Settings', 'gc-testimonials-to-testimonials' ),
-			admin_url( 'edit.php?post_type=' . Testimonials_Widget::PT . '&page=' . Gc_Testimonials_to_Testimonials_Settings::ID ),
+			'wtt2t_settings_link',
+			esc_html__( 'WooTheme Testimonials to Testimonials Settings', 'wootheme-testimonials-to-testimonials' ),
+			admin_url( 'edit.php?post_type=' . Testimonials_Widget::PT . '&page=' . Wootheme_Testimonials_to_Testimonials_Settings::ID ),
 			self::$menu_id,
 			array( 'style' => 'font-weight: bold;' )
 		);
@@ -100,7 +100,7 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 
 
 	public static function init() {
-		load_plugin_textdomain( self::ID, false, 'gc-testimonials-to-testimonials/languages' );
+		load_plugin_textdomain( self::ID, false, 'wootheme-testimonials-to-testimonials/languages' );
 
 		add_action( 'wp_ajax_ajax_process_post', array( __CLASS__, 'ajax_process_post' ) );
 
@@ -112,7 +112,7 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 		if ( self::BASE == $file ) {
 			array_unshift( $links, self::$settings_link );
 
-			$link = '<a href="' . get_admin_url() . 'edit.php?post_type=' . Testimonials_Widget::PT . '&page=' . self::ID . '">' . esc_html__( 'Migrate', 'gc-testimonials-to-testimonials' ) . '</a>';
+			$link = '<a href="' . get_admin_url() . 'edit.php?post_type=' . Testimonials_Widget::PT . '&page=' . self::ID . '">' . esc_html__( 'Migrate', 'wootheme-testimonials-to-testimonials' ) . '</a>';
 			array_unshift( $links, $link );
 		}
 
@@ -138,11 +138,11 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 
 		global $wpdb;
 		
-		require_once GCT2T_DIR_LIB . '/class-gc-testimonials-to-testimonials-settings.php';
+		require_once WTT2T_DIR_LIB . '/class-wootheme-testimonials-to-testimonials-settings.php';
 
-		$delete_data = gct2t_get_option( 'delete_data', false );
+		$delete_data = wtt2t_get_option( 'delete_data', false );
 		if ( $delete_data ) {
-			delete_option( Gc_Testimonials_to_Testimonials_Settings::ID );
+			delete_option( Wootheme_Testimonials_to_Testimonials_Settings::ID );
 			$wpdb->query( 'OPTIMIZE TABLE `' . $wpdb->options . '`' );
 		}
 	}
@@ -172,7 +172,7 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 
 	public static function set_post_types() {
 		self::$post_types   = array();
-		self::$post_types[] = self::GCT_PT;
+		self::$post_types[] = self::WTT_PT;
 	}
 
 
@@ -185,7 +185,7 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 	public static function user_interface() {
 		// Capability check
 		if ( ! current_user_can( 'manage_options' ) )
-			wp_die( self::$post_id, esc_html__( "Your user account doesn't have permission to access this.", 'gc-testimonials-to-testimonials' ) );
+			wp_die( self::$post_id, esc_html__( "Your user account doesn't have permission to access this.", 'wootheme-testimonials-to-testimonials' ) );
 
 ?>
 
@@ -193,7 +193,7 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 
 <div class="wrap wpsposts">
 	<div class="icon32" id="icon-tools"></div>
-	<h2><?php _e( 'GC Testimonials to Testimonials Migrator', 'gc-testimonials-to-testimonials' ); ?></h2>
+	<h2><?php _e( 'WooTheme Testimonials to Testimonials Migrator', 'wootheme-testimonials-to-testimonials' ); ?></h2>
 
 <?php
 		// If the button was clicked
@@ -211,7 +211,7 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 
 			$count = count( $posts );
 			if ( ! $count ) {
-				echo '	<p>' . _e( 'All done. No posts needing processing found.', 'gc-testimonials-to-testimonials' ) . '</p></div>';
+				echo '	<p>' . _e( 'All done. No posts needing processing found.', 'wootheme-testimonials-to-testimonials' ) . '</p></div>';
 				return;
 			}
 
@@ -236,7 +236,7 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 			'order' => 'DESC',
 		);
 
-		$include_ids = gct2t_get_option( 'posts_to_import' );
+		$include_ids = wtt2t_get_option( 'posts_to_import' );
 		if ( $include_ids ) {
 			$query[ 'post__in' ] = str_getcsv( $include_ids );
 		} else {
@@ -251,14 +251,14 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 			unset( $query['meta_query'] );
 		}
 
-		$skip_ids = gct2t_get_option( 'skip_importing_post_ids' );
+		$skip_ids = wtt2t_get_option( 'skip_importing_post_ids' );
 		if ( $skip_ids )
 			$query[ 'post__not_in' ] = str_getcsv( $skip_ids );
 
 		$results  = new WP_Query( $query );
 		$query_wp = $results->request;
 
-		$limit = gct2t_get_option( 'limit' );
+		$limit = wtt2t_get_option( 'limit' );
 		if ( $limit )
 			$query_wp = preg_replace( '#\bLIMIT 0,.*#', 'LIMIT 0,' . $limit, $query_wp );
 		else
@@ -275,17 +275,17 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 	<form method="post" action="">
 <?php wp_nonce_field( self::ID ); ?>
 
-	<p><?php _e( 'Use this tool for migrating GC Testimonials entries to Testimonials custom post types.', 'gc-testimonials-to-testimonials' ); ?></p>
+	<p><?php _e( 'Use this tool for migrating WooTheme Testimonials entries to Testimonials custom post types.', 'wootheme-testimonials-to-testimonials' ); ?></p>
 
-	<p><?php _e( 'This migration is not reversible. Backup your database beforehand or be prepared to delete each migrated testimonial manually.', 'gc-testimonials-to-testimonials' ); ?></p>
+	<p><?php _e( 'This migration is not reversible. Backup your database beforehand or be prepared to delete each migrated testimonial manually.', 'wootheme-testimonials-to-testimonials' ); ?></p>
 
-	<p><?php printf( esc_html__( 'Please review your %s before proceeding.', 'gc-testimonials-to-testimonials' ), self::$settings_link ); ?></p>
+	<p><?php printf( esc_html__( 'Please review your %s before proceeding.', 'wootheme-testimonials-to-testimonials' ), self::$settings_link ); ?></p>
 
-	<p><?php _e( 'To begin, just press the button below.', 'gc-testimonials-to-testimonials' ); ?></p>
+	<p><?php _e( 'To begin, just press the button below.', 'wootheme-testimonials-to-testimonials' ); ?></p>
 
-	<p><input type="submit" class="button hide-if-no-js" name="<?php echo self::ID; ?>" id="<?php echo self::ID; ?>" value="<?php _e( 'Migrate GC Testimonials to Testimonials', 'gc-testimonials-to-testimonials' ) ?>" /></p>
+	<p><input type="submit" class="button hide-if-no-js" name="<?php echo self::ID; ?>" id="<?php echo self::ID; ?>" value="<?php _e( 'Migrate WooTheme Testimonials to Testimonials', 'wootheme-testimonials-to-testimonials' ) ?>" /></p>
 
-	<noscript><p><em><?php _e( 'You must enable Javascript in order to proceed!', 'gc-testimonials-to-testimonials' ) ?></em></p></noscript>
+	<noscript><p><em><?php _e( 'You must enable Javascript in order to proceed!', 'wootheme-testimonials-to-testimonials' ) ?></em></p></noscript>
 
 	</form>
 <?php
@@ -298,31 +298,31 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 	 * @SuppressWarnings(PHPMD.Superglobals)
 	 */
 	public static function show_status( $count, $posts ) {
-		echo '<p>' . esc_html__( 'Please be patient while this script run. This can take a while, up to a minute per post. Do not navigate away from this page until this script is done or the import will not be completed. You will be notified via this page when the import is completed.', 'gc-testimonials-to-testimonials' ) . '</p>';
+		echo '<p>' . esc_html__( 'Please be patient while this script run. This can take a while, up to a minute per post. Do not navigate away from this page until this script is done or the import will not be completed. You will be notified via this page when the import is completed.', 'wootheme-testimonials-to-testimonials' ) . '</p>';
 
-		echo '<p>' . sprintf( esc_html__( 'Estimated time required to import is %1$s minutes.', 'gc-testimonials-to-testimonials' ), ( $count * 1 ) ) . '</p>';
+		echo '<p>' . sprintf( esc_html__( 'Estimated time required to import is %1$s minutes.', 'wootheme-testimonials-to-testimonials' ), ( $count * 1 ) ) . '</p>';
 
-		$text_goback = ( ! empty( $_GET['goback'] ) ) ? sprintf( __( 'To go back to the previous page, <a href="%s">click here</a>.', 'gc-testimonials-to-testimonials' ), 'javascript:history.go(-1)' ) : '';
+		$text_goback = ( ! empty( $_GET['goback'] ) ) ? sprintf( __( 'To go back to the previous page, <a href="%s">click here</a>.', 'wootheme-testimonials-to-testimonials' ), 'javascript:history.go(-1)' ) : '';
 
-		$text_failures = sprintf( __( 'All done! %1$s posts were successfully processed in %2$s seconds and there were %3$s failures. To try importing the failed posts again, <a href="%4$s">click here</a>. %5$s', 'gc-testimonials-to-testimonials' ), "' + rt_successes + '", "' + rt_totaltime + '", "' + rt_errors + '", esc_url( wp_nonce_url( admin_url( 'tools.php?page=' . self::ID . '&goback=1' ) ) . '&posts=' ) . "' + rt_failedlist + '", $text_goback );
+		$text_failures = sprintf( __( 'All done! %1$s posts were successfully processed in %2$s seconds and there were %3$s failures. To try importing the failed posts again, <a href="%4$s">click here</a>. %5$s', 'wootheme-testimonials-to-testimonials' ), "' + rt_successes + '", "' + rt_totaltime + '", "' + rt_errors + '", esc_url( wp_nonce_url( admin_url( 'tools.php?page=' . self::ID . '&goback=1' ) ) . '&posts=' ) . "' + rt_failedlist + '", $text_goback );
 
-		$text_nofailures = sprintf( esc_html__( 'All done! %1$s posts were successfully processed in %2$s seconds and there were no failures. %3$s', 'gc-testimonials-to-testimonials' ), "' + rt_successes + '", "' + rt_totaltime + '", $text_goback );
+		$text_nofailures = sprintf( esc_html__( 'All done! %1$s posts were successfully processed in %2$s seconds and there were no failures. %3$s', 'wootheme-testimonials-to-testimonials' ), "' + rt_successes + '", "' + rt_totaltime + '", $text_goback );
 ?>
 
-	<noscript><p><em><?php _e( 'You must enable Javascript in order to proceed!', 'gc-testimonials-to-testimonials' ) ?></em></p></noscript>
+	<noscript><p><em><?php _e( 'You must enable Javascript in order to proceed!', 'wootheme-testimonials-to-testimonials' ) ?></em></p></noscript>
 
 	<div id="wpsposts-bar" style="position:relative;height:25px;">
 		<div id="wpsposts-bar-percent" style="position:absolute;left:50%;top:50%;width:300px;margin-left:-150px;height:25px;margin-top:-9px;font-weight:bold;text-align:center;"></div>
 	</div>
 
-	<p><input type="button" class="button hide-if-no-js" name="wpsposts-stop" id="wpsposts-stop" value="<?php _e( 'Abort Migrating Posts', 'gc-testimonials-to-testimonials' ) ?>" /></p>
+	<p><input type="button" class="button hide-if-no-js" name="wpsposts-stop" id="wpsposts-stop" value="<?php _e( 'Abort Migrating Posts', 'wootheme-testimonials-to-testimonials' ) ?>" /></p>
 
-	<h3 class="title"><?php _e( 'Status', 'gc-testimonials-to-testimonials' ) ?></h3>
+	<h3 class="title"><?php _e( 'Status', 'wootheme-testimonials-to-testimonials' ) ?></h3>
 
 	<p>
-		<?php printf( esc_html__( 'Total Testimonials: %s', 'gc-testimonials-to-testimonials' ), $count ); ?><br />
-		<?php printf( esc_html__( 'Testimonials Migrated: %s', 'gc-testimonials-to-testimonials' ), '<span id="wpsposts-debug-successcount">0</span>' ); ?><br />
-		<?php printf( esc_html__( 'Migration Failures: %s', 'gc-testimonials-to-testimonials' ), '<span id="wpsposts-debug-failurecount">0</span>' ); ?>
+		<?php printf( esc_html__( 'Total Testimonials: %s', 'wootheme-testimonials-to-testimonials' ), $count ); ?><br />
+		<?php printf( esc_html__( 'Testimonials Migrated: %s', 'wootheme-testimonials-to-testimonials' ), '<span id="wpsposts-debug-successcount">0</span>' ); ?><br />
+		<?php printf( esc_html__( 'Migration Failures: %s', 'wootheme-testimonials-to-testimonials' ), '<span id="wpsposts-debug-failurecount">0</span>' ); ?>
 	</p>
 
 	<ol id="wpsposts-debuglist">
@@ -353,7 +353,7 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 			// Stop button
 			$( "#wpsposts-stop" ).click(function() {
 				rt_continue = false;
-				$( '#wpsposts-stop' ).val( "<?php echo esc_html__( 'Stopping, please wait a moment.', 'gc-testimonials-to-testimonials' ); ?>" );
+				$( '#wpsposts-stop' ).val( "<?php echo esc_html__( 'Stopping, please wait a moment.', 'wootheme-testimonials-to-testimonials' ); ?>" );
 			});
 
 			// Clear out the empty list element that's there for HTML validation purposes
@@ -453,13 +453,13 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 
 		$post = get_post( self::$post_id, ARRAY_A );
 		if ( ! $post || ! in_array( $post['post_type'], self::$post_types )  )
-			die( json_encode( array( 'error' => sprintf( esc_html__( 'Failed Migration: %s is incorrect post type.', 'gc-testimonials-to-testimonials' ), esc_html( self::$post_id ) ) ) ) );
+			die( json_encode( array( 'error' => sprintf( esc_html__( 'Failed Migration: %s is incorrect post type.', 'wootheme-testimonials-to-testimonials' ), esc_html( self::$post_id ) ) ) ) );
 
 		$result = self::migrate_item( self::$post_id, $post );
 		if ( is_numeric( $result ) )
-			die( json_encode( array( 'success' => sprintf( __( '&quot;<a href="%1$s" target="_blank">%2$s</a>&quot; GC Testimonial ID %3$s was successfully migrated to Testimonials %6$s &quot;<a href="%4$s" target="_blank">%5$s</a>&quot;.', 'gc-testimonials-to-testimonials' ), get_permalink( self::$post_id ), esc_html( get_the_title( self::$post_id ) ), self::$post_id, get_permalink( $result ), esc_html( get_the_title( $result ) ), $result ) ) ) );
+			die( json_encode( array( 'success' => sprintf( __( '&quot;<a href="%1$s" target="_blank">%2$s</a>&quot; WooTheme Testimonial ID %3$s was successfully migrated to Testimonials %6$s &quot;<a href="%4$s" target="_blank">%5$s</a>&quot;.', 'wootheme-testimonials-to-testimonials' ), get_permalink( self::$post_id ), esc_html( get_the_title( self::$post_id ) ), self::$post_id, get_permalink( $result ), esc_html( get_the_title( $result ) ), $result ) ) ) );
 		else
-			die( json_encode( array( 'error' => sprintf( __( '&quot;<a href="%1$s" target="_blank">%2$s</a>&quot; Unable to be migrated.', 'gc-testimonials-to-testimonials' ), get_permalink( self::$post_id ), esc_html( get_the_title( self::$post_id ) ) ) ) ) );
+			die( json_encode( array( 'error' => sprintf( __( '&quot;<a href="%1$s" target="_blank">%2$s</a>&quot; Unable to be migrated.', 'wootheme-testimonials-to-testimonials' ), get_permalink( self::$post_id ), esc_html( get_the_title( self::$post_id ) ) ) ) ) );
 	}
 
 
@@ -546,7 +546,7 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 
 
 	public static function notice_1_0_0() {
-		$text = sprintf( __( 'If your Migrate GC Testimonials to Testimonials display has gone to funky town, please <a href="%s">read the FAQ</a> about possible CSS fixes.', 'gc-testimonials-to-testimonials' ), 'https://aihrus.zendesk.com/entries/23722573-Major-Changes-Since-2-10-0' );
+		$text = sprintf( __( 'If your Migrate WooTheme Testimonials to Testimonials display has gone to funky town, please <a href="%s">read the FAQ</a> about possible CSS fixes.', 'wootheme-testimonials-to-testimonials' ), 'https://aihrus.zendesk.com/entries/23722573-Major-Changes-Since-2-10-0' );
 
 		self::notice_updated( $text );
 	}
@@ -560,27 +560,27 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 	public static function notice_donate( $disable_donate = null, $item_name = null ) {
 		$disable_donate = tw_get_option( 'disable_donate' );
 
-		parent::notice_donate( $disable_donate, GCT2T_NAME );
+		parent::notice_donate( $disable_donate, WTT2T_NAME );
 	}
 
 
 	public static function update() {
-		$prior_version = gct2t_get_option( 'admin_notices' );
+		$prior_version = wtt2t_get_option( 'admin_notices' );
 		if ( $prior_version ) {
 			if ( $prior_version < '1.0.0' )
 				add_action( 'admin_notices', array( __CLASS__, 'notice_1_0_0' ) );
 
 			if ( $prior_version < self::VERSION )
-				do_action( 'gct2t_update' );
+				do_action( 'wtt2t_update' );
 
-			gct2t_set_option( 'admin_notices' );
+			wtt2t_set_option( 'admin_notices' );
 		}
 
 		// display donate on major/minor version release
-		$donate_version = gct2t_get_option( 'donate_version', false );
+		$donate_version = wtt2t_get_option( 'donate_version', false );
 		if ( ! $donate_version || ( $donate_version != self::VERSION && preg_match( '#\.0$#', self::VERSION ) ) ) {
 			add_action( 'admin_notices', array( __CLASS__, 'notice_donate' ) );
-			gct2t_set_option( 'donate_version', self::VERSION );
+			wtt2t_set_option( 'donate_version', self::VERSION );
 		}
 	}
 
@@ -592,10 +592,10 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 			wp_register_script( 'jquery-ui-progressbar', plugins_url( 'js/jquery.ui.progressbar.js', __FILE__ ), array( 'jquery', 'jquery-ui-core', 'jquery-ui-widget' ), '1.10.3' );
 			wp_enqueue_script( 'jquery-ui-progressbar' );
 
-			add_action( 'admin_footer', array( 'Gc_Testimonials_to_Testimonials', 'get_scripts' ) );
+			add_action( 'admin_footer', array( 'Wootheme_Testimonials_to_Testimonials', 'get_scripts' ) );
 		}
 
-		do_action( 'gct2t_scripts', $atts );
+		do_action( 'wtt2t_scripts', $atts );
 	}
 
 
@@ -604,10 +604,10 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 			wp_register_style( 'jquery-ui-progressbar', plugins_url( 'css/redmond/jquery-ui-1.10.3.custom.min.css', __FILE__ ), false, '1.10.3' );
 			wp_enqueue_style( 'jquery-ui-progressbar' );
 
-			add_action( 'admin_footer', array( 'Gc_Testimonials_to_Testimonials', 'get_styles' ) );
+			add_action( 'admin_footer', array( 'Wootheme_Testimonials_to_Testimonials', 'get_styles' ) );
 		}
 
-		do_action( 'gct2t_styles' );
+		do_action( 'wtt2t_styles' );
 	}
 
 
@@ -615,17 +615,17 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 		$valid_version = true;
 
 		$valid_base = true;
-		if ( ! is_plugin_active( GCT2T_REQ_BASE ) ) {
+		if ( ! is_plugin_active( WTT2T_REQ_BASE ) ) {
 			$valid_base = false;
 		} elseif ( ! defined( 'TW_VERSION' ) ) {
 			$valid_base = false;
-		} elseif ( ! version_compare( TW_VERSION, GCT2T_REQ_VERSION, '>=' ) ) {
+		} elseif ( ! version_compare( TW_VERSION, WTT2T_REQ_VERSION, '>=' ) ) {
 			$valid_base = false;
 		}
 
 		if ( ! $valid_base ) {
 			$valid_version = false;
-			self::set_notice( 'gct2t_notice_version' );
+			self::set_notice( 'wtt2t_notice_version' );
 		}
 
 		if ( ! $valid_version ) {
@@ -678,7 +678,7 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 		$do_load = false;
 		if ( ! empty( $GLOBALS['pagenow'] ) && in_array( $GLOBALS['pagenow'], array( 'edit.php', 'options.php', 'plugins.php' ) ) ) {
 			$do_load = true;
-		} elseif ( ! empty( $_REQUEST['page'] ) && Gc_Testimonials_to_Testimonials_Settings::ID == $_REQUEST['page'] ) {
+		} elseif ( ! empty( $_REQUEST['page'] ) && Wootheme_Testimonials_to_Testimonials_Settings::ID == $_REQUEST['page'] ) {
 			$do_load = true;
 		} elseif ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			$do_load = true;
@@ -690,21 +690,21 @@ class Gc_Testimonials_to_Testimonials extends Aihrus_Common {
 
 	public static function get_defaults( $single_view = false ) {
 		if ( empty( $single_view ) )
-			return apply_filters( 'gct2t_defaults', gct2t_get_options() );
+			return apply_filters( 'wtt2t_defaults', wtt2t_get_options() );
 		else
-			return apply_filters( 'gct2t_defaults_single', gct2t_get_options() );
+			return apply_filters( 'wtt2t_defaults_single', wtt2t_get_options() );
 	}
 
 
 }
 
 
-register_activation_hook( __FILE__, array( 'Gc_Testimonials_to_Testimonials', 'activation' ) );
-register_deactivation_hook( __FILE__, array( 'Gc_Testimonials_to_Testimonials', 'deactivation' ) );
-register_uninstall_hook( __FILE__, array( 'Gc_Testimonials_to_Testimonials', 'uninstall' ) );
+register_activation_hook( __FILE__, array( 'Wootheme_Testimonials_to_Testimonials', 'activation' ) );
+register_deactivation_hook( __FILE__, array( 'Wootheme_Testimonials_to_Testimonials', 'deactivation' ) );
+register_uninstall_hook( __FILE__, array( 'Wootheme_Testimonials_to_Testimonials', 'uninstall' ) );
 
 
-add_action( 'plugins_loaded', 'gc_testimonials_to_testimonials_init', 99 );
+add_action( 'plugins_loaded', 'wootheme_testimonials_to_testimonials_init', 99 );
 
 
 /**
@@ -713,21 +713,21 @@ add_action( 'plugins_loaded', 'gc_testimonials_to_testimonials_init', 99 );
  * @SuppressWarnings(PHPMD.LongVariable)
  * @SuppressWarnings(PHPMD.UnusedLocalVariable)
  */
-function gc_testimonials_to_testimonials_init() {
+function wootheme_testimonials_to_testimonials_init() {
 	if ( ! is_admin() )
 		return;
 
 	if ( ! function_exists( 'add_screen_meta_link' ) )
-		require_once GCT2T_DIR_LIB . '/screen-meta-links.php';
+		require_once WTT2T_DIR_LIB . '/screen-meta-links.php';
 
-	if ( Gc_Testimonials_to_Testimonials::version_check() ) {
-		global $Gc_Testimonials_to_Testimonials;
-		if ( is_null( $Gc_Testimonials_to_Testimonials ) )
-			$Gc_Testimonials_to_Testimonials = new Gc_Testimonials_to_Testimonials();
+	if ( Wootheme_Testimonials_to_Testimonials::version_check() ) {
+		global $Wootheme_Testimonials_to_Testimonials;
+		if ( is_null( $Wootheme_Testimonials_to_Testimonials ) )
+			$Wootheme_Testimonials_to_Testimonials = new Wootheme_Testimonials_to_Testimonials();
 
-		global $Gc_Testimonials_to_Testimonials_Settings;
-		if ( is_null( $Gc_Testimonials_to_Testimonials_Settings ) )
-			$Gc_Testimonials_to_Testimonials_Settings = new Gc_Testimonials_to_Testimonials_Settings();
+		global $Wootheme_Testimonials_to_Testimonials_Settings;
+		if ( is_null( $Wootheme_Testimonials_to_Testimonials_Settings ) )
+			$Wootheme_Testimonials_to_Testimonials_Settings = new Wootheme_Testimonials_to_Testimonials_Settings();
 	}
 }
 
