@@ -3,7 +3,7 @@
  * Plugin Name: WooTheme Testimonials to Testimonials by Aihrus
  * Plugin URI: http://wordpress.org/plugins/wootheme-testimonials-to-testimonials/
  * Description: Migrate WooTheme Testimonials entries to Testimonials by Aihrus custom post types.
- * Version: 1.1.2
+ * Version: 1.0.0
  * Author: Michael Cannon
  * Author URI: http://aihr.us/resume/
  * License: GPLv2 or later
@@ -498,11 +498,9 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 		$post_meta   = get_post_custom( $post_id );
 
 		$fields = array(
-			'client_name' => 'testimonials-widget-client-name',
-			// 'client_photo' => 'featured-image',
-			'company_name' => 'testimonials-widget-company',
-			'company_website' => 'testimonials-widget-url',
-			'email' => 'testimonials-widget-email',
+			'_byline' => 'testimonials-widget-title',
+			'_gravatar_email' => 'testimonials-widget-email',
+			'_url' => 'testimonials-widget-url',
 		);
 		foreach ( $fields as $field => $target ) {
 			if ( isset( $post_meta[ $field ][ 0 ] ) )
