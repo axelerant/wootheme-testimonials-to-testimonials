@@ -3,7 +3,7 @@
  * Plugin Name: WooTheme Testimonials to Testimonials by Aihrus
  * Plugin URI: http://wordpress.org/plugins/wootheme-testimonials-to-testimonials/
  * Description: Migrate WooTheme Testimonials entries to Testimonials by Aihrus custom post types.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: Michael Cannon
  * Author URI: http://aihr.us/resume/
  * License: GPLv2 or later
@@ -28,15 +28,15 @@
 
 define( 'WTT2T_BASE', plugin_basename( __FILE__ ) );
 define( 'WTT2T_DIR', plugin_dir_path( __FILE__ ) );
-define( 'WTT2T_DIR_INC', WTT2T_DIR . '/includes' );
-define( 'WTT2T_DIR_LIB', WTT2T_DIR_INC . '/libraries' );
+define( 'WTT2T_DIR_INC', WTT2T_DIR . 'includes/' );
+define( 'WTT2T_DIR_LIB', WTT2T_DIR_INC . 'libraries/' );
 define( 'WTT2T_NAME', 'WooTheme Testimonials to Testimonials by Aihrus' );
 define( 'WTT2T_REQ_BASE', 'testimonials-widget/testimonials-widget.php' );
 define( 'WTT2T_REQ_BASE_PREM', 'testimonials-widget-premium/testimonials-widget-premium.php' );
 define( 'WTT2T_REQ_NAME', 'Testimonials by Aihrus' );
 define( 'WTT2T_REQ_SLUG', 'testimonials-widget' );
-define( 'WTT2T_REQ_VERSION', '2.17.2' );
-define( 'WTT2T_VERSION', '1.0.0' );
+define( 'WTT2T_REQ_VERSION', '2.18.0' );
+define( 'WTT2T_VERSION', '1.1.0' );
 
 if ( defined( 'TW_DIR_LIB' ) ) {
 	define( 'WTT2T_DIR_LIB_ALT', TW_DIR_LIB );

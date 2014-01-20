@@ -13,6 +13,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
+require_once WTT2T_DIR_INC . 'class-wootheme-testimonials-to-testimonials-settings.php';
 require_once WTT2T_DIR_LIB_ALT . 'aihrus-framework/class-aihrus-common.php';
 
 if ( class_exists( 'Wootheme_Testimonials_to_Testimonials' ) )
@@ -591,21 +592,6 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 
 	public static function version_check() {
 		$valid_version = true;
-
-		$valid_base = true;
-		if ( ! is_plugin_active( WTT2T_REQ_BASE ) ) {
-			$valid_base = false;
-		} elseif ( ! defined( 'TW_VERSION' ) ) {
-			$valid_base = false;
-		} elseif ( ! version_compare( TW_VERSION, WTT2T_REQ_VERSION, '>=' ) ) {
-			$valid_base = false;
-		}
-
-		if ( ! $valid_base ) {
-			$valid_version = false;
-			self::set_notice( 'wtt2t_notice_version' );
-		}
-
 		if ( ! $valid_version ) {
 			deactivate_plugins( self::BASE );
 			self::check_notices();

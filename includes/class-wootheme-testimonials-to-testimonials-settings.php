@@ -87,7 +87,7 @@ class Wootheme_Testimonials_to_Testimonials_Settings extends Aihrus_Settings {
 	public static function init() {
 		load_plugin_textdomain( 'wootheme-testimonials-to-testimonials', false, '/wootheme-testimonials-to-testimonials/languages/' );
 
-		self::$plugin_path = $plugin_path;
+		self::$plugin_assets = Wootheme_Testimonials_to_Testimonials::$plugin_assets;
 	}
 
 
@@ -204,7 +204,7 @@ class Wootheme_Testimonials_to_Testimonials_Settings extends Aihrus_Settings {
 
 		$screen->set_help_sidebar(
 			'<p><strong>' . esc_html__( 'For more information:', 'wootheme-testimonials-to-testimonials' ) . '</strong></p><p>' .
-			esc_html__( 'These WooTheme Testimonials to Testimonials Settings establish the default option values for shortcodes, theme functions, and widget instances.', 'wootheme-testimonials-to-testimonials' ) .
+			esc_html__( 'These WooTheme Testimonials to Testimonials Settings establish the default option values for migration.', 'wootheme-testimonials-to-testimonials' ) .
 			'</p><p>' .
 			sprintf(
 				__( 'View the <a href="%s">WooTheme Testimonials to Testimonials documentation</a>.', 'wootheme-testimonials-to-testimonials' ),

@@ -1,6 +1,8 @@
 # CHANGELOG WooTheme Testimonials to Testimonials by Aihrus
 
 ## master
+
+## 1.1.0
 * Move ci to tests
 * Move CSS to assets
 * Move files to assets
