@@ -1,18 +1,5 @@
 <?php
 /**
- * Plugin Name: WooTheme Testimonials to Testimonials by Aihrus
- * Plugin URI: http://wordpress.org/plugins/wootheme-testimonials-to-testimonials/
- * Description: Migrate WooTheme Testimonials entries to Testimonials by Aihrus custom post types.
- * Version: 1.0.0
- * Author: Michael Cannon
- * Author URI: http://aihr.us/resume/
- * License: GPLv2 or later
- * Text Domain: wootheme-testimonials-to-testimonials
- * Domain Path: /languages
- */
-
-
-/**
  * Copyright 2013 Michael Cannon (email: mc@aihr.us)
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 2, as
@@ -26,25 +13,10 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-define( 'WTT2T_AIHR_VERSION', '1.0.1' );
-define( 'WTT2T_BASE', plugin_basename( __FILE__ ) );
-define( 'WTT2T_DIR', plugin_dir_path( __FILE__ ) );
-define( 'WTT2T_DIR_LIB', WTT2T_DIR . '/lib' );
-define( 'WTT2T_NAME', 'WooTheme Testimonials to Testimonials by Aihrus' );
-define( 'WTT2T_REQ_BASE', 'testimonials-widget/testimonials-widget.php' );
-define( 'WTT2T_REQ_NAME', 'Testimonials by Aihrus' );
-define( 'WTT2T_REQ_SLUG', 'testimonials-widget' );
-define( 'WTT2T_REQ_VERSION', '2.17.2' );
-define( 'WTT2T_VERSION', '1.0.0' );
+require_once WTT2T_DIR_LIB_ALT . 'aihrus-framework/class-aihrus-common.php';
 
-require_once WTT2T_DIR_LIB . '/requirements.php';
-
-if ( ! wtt2t_requirements_check() ) {
-	return false;
-}
-
-require_once WTT2T_DIR_LIB . '/aihrus/class-aihrus-common.php';
-require_once WTT2T_DIR_LIB . '/class-wootheme-testimonials-to-testimonials-settings.php';
+if ( class_exists( 'Wootheme_Testimonials_to_Testimonials' ) )
+	return;
 
 
 class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
@@ -60,6 +32,7 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 	public static $class = __CLASS__;
 	public static $menu_id;
 	public static $notice_key;
+	public static $plugin_assets;
 	public static $scripts = array();
 	public static $settings_link;
 	public static $styles        = array();
@@ -69,6 +42,11 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 
 
 	public function __construct() {
+		parent::__construct();
+
+		self::$plugin_assets = plugins_url( '/assets/', dirname( __FILE__ ) );
+		self::$plugin_assets = self::strip_protocol( self::$plugin_assets );
+
 		add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
 		add_action( 'admin_menu', array( __CLASS__, 'admin_menu' ) );
 		add_action( 'init', array( __CLASS__, 'init' ) );
@@ -140,7 +118,7 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 
 		global $wpdb;
 		
-		require_once WTT2T_DIR_LIB . '/class-wootheme-testimonials-to-testimonials-settings.php';
+		require_once WTT2T_DIR_INC . 'class-wootheme-testimonials-to-testimonials-settings.php';
 
 		$delete_data = wtt2t_get_option( 'delete_data', false );
 		if ( $delete_data ) {
@@ -589,7 +567,7 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 		if ( is_admin() ) {
 			wp_enqueue_script( 'jquery' );
 
-			wp_register_script( 'jquery-ui-progressbar', plugins_url( 'js/jquery.ui.progressbar.js', __FILE__ ), array( 'jquery', 'jquery-ui-core', 'jquery-ui-widget' ), '1.10.3' );
+			wp_register_script( 'jquery-ui-progressbar', self::$plugin_assets . 'js/jquery.ui.progressbar.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-widget' ), '1.10.3' );
 			wp_enqueue_script( 'jquery-ui-progressbar' );
 
 			add_action( 'admin_footer', array( 'Wootheme_Testimonials_to_Testimonials', 'get_scripts' ) );
@@ -601,7 +579,7 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 
 	public static function styles() {
 		if ( is_admin() ) {
-			wp_register_style( 'jquery-ui-progressbar', plugins_url( 'css/redmond/jquery-ui-1.10.3.custom.min.css', __FILE__ ), false, '1.10.3' );
+			wp_register_style( 'jquery-ui-progressbar', self::$plugin_assets . 'css/redmond/jquery-ui-1.10.3.custom.min.css', false, '1.10.3' );
 			wp_enqueue_style( 'jquery-ui-progressbar' );
 
 			add_action( 'admin_footer', array( 'Wootheme_Testimonials_to_Testimonials', 'get_styles' ) );
@@ -697,39 +675,5 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 
 
 }
-
-
-register_activation_hook( __FILE__, array( 'Wootheme_Testimonials_to_Testimonials', 'activation' ) );
-register_deactivation_hook( __FILE__, array( 'Wootheme_Testimonials_to_Testimonials', 'deactivation' ) );
-register_uninstall_hook( __FILE__, array( 'Wootheme_Testimonials_to_Testimonials', 'uninstall' ) );
-
-
-add_action( 'plugins_loaded', 'wootheme_testimonials_to_testimonials_init', 99 );
-
-
-/**
- *
- *
- * @SuppressWarnings(PHPMD.LongVariable)
- * @SuppressWarnings(PHPMD.UnusedLocalVariable)
- */
-function wootheme_testimonials_to_testimonials_init() {
-	if ( ! is_admin() )
-		return;
-
-	if ( ! function_exists( 'add_screen_meta_link' ) )
-		require_once WTT2T_DIR_LIB . '/screen-meta-links.php';
-
-	if ( Wootheme_Testimonials_to_Testimonials::version_check() ) {
-		global $Wootheme_Testimonials_to_Testimonials;
-		if ( is_null( $Wootheme_Testimonials_to_Testimonials ) )
-			$Wootheme_Testimonials_to_Testimonials = new Wootheme_Testimonials_to_Testimonials();
-
-		global $Wootheme_Testimonials_to_Testimonials_Settings;
-		if ( is_null( $Wootheme_Testimonials_to_Testimonials_Settings ) )
-			$Wootheme_Testimonials_to_Testimonials_Settings = new Wootheme_Testimonials_to_Testimonials_Settings();
-	}
-}
-
 
 ?>
