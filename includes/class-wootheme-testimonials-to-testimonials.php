@@ -456,10 +456,9 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 	 *
 	 *
 	 * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+	 * @SuppressWarnings(PHPMD.UnusedLocalVariable)
 	 */
 	public static function migrate_item( $post_id, $post ) {
-		global $wpdb;
-
 		$migrated_key  = '_' . Testimonials_Widget::PT;
 		$migrated_args = array(
 			'post_type' => Testimonials_Widget::PT,
