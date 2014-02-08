@@ -2,6 +2,9 @@
 
 ## master
 
+## 1.1.1RC1
+* Coding standards update
+
 ## 1.1.0
 * Move ci to tests
 * Move CSS to assets
