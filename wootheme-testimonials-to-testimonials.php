@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WooTheme Testimonials to Testimonials by Aihrus
+ * Plugin Name: Testimonials – WooTheme Testimonials Migrator
  * Plugin URI: http://wordpress.org/plugins/wootheme-testimonials-to-testimonials/
  * Description: Migrate WooTheme Testimonials entries to Testimonials by Aihrus custom post types.
  * Version: 1.1.1RC1
