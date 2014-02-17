@@ -2,7 +2,7 @@
 
 ## master
 
-## 1.1.1RC1
+## 1.1.1
 * Coding standards update
 * Require Testimonials by Aihrus 2.18.1
 * Revise Plugin Name: Testimonials – WooTheme Testimonials Migrator
