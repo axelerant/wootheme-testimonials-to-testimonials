@@ -600,7 +600,7 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 	public static function version_check() {
 		$valid_version = true;
 		if ( ! $valid_version ) {
-			$deactivate_reason = esc_html__( 'Failed version check' );
+			$deactivate_reason = esc_html__( 'Failed version check', 'wootheme-testimonials-to-testimonials' );
 			aihr_deactivate_plugin( self::BASE, WTT2T_NAME, $deactivate_reason );
 			self::check_notices();
 		}
