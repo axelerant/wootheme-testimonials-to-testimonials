@@ -45,26 +45,14 @@ if ( ! function_exists( 'aihr_notice_version' ) ) {
 }
 
 
-/**
- *
- *
- * @SuppressWarnings(PHPMD.UnusedFormalParameter)
- */
-function wtt2t_requirements_check( $force_check = false ) {
-	$deactivate_reason = false;
+function wtt2t_requirements_check() {
 	if ( ! is_plugin_active( WTT2T_REQ_BASE ) && ! is_plugin_active( WTT2T_REQ_BASE_PREM ) ) {
 		add_action( 'admin_notices', 'wtt2t_notice_version' );
 
 		return false;
 	}
 
-	if ( ! empty( $deactivate_reason ) ) {
-		aihr_deactivate_plugin( WTT2T_BASE, WTT2T_NAME, $deactivate_reason );
-	}
-
-	$check_okay = empty( $deactivate_reason );
-
-	return $check_okay;
+	return true;
 }
 
 
