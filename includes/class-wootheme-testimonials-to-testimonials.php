@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2014 Michael Cannon (email: mc@aihr.us)
+ * Copyright 2015 Axelerant (email: info@axelerant.com)
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 2, as
  * published by the Free Software Foundation.
@@ -531,7 +531,7 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 
 
 	public static function notice_1_0_0() {
-		$text = sprintf( __( 'If your Migrate WooTheme Testimonials to Testimonials display has gone to funky town, please <a href="%s">read the FAQ</a> about possible CSS fixes.', 'wootheme-testimonials-to-testimonials' ), 'https://aihrus.zendesk.com/entries/23722573-Major-Changes-Since-2-10-0' );
+		$text = sprintf( __( 'If your Migrate WooTheme Testimonials to Testimonials display has gone to funky town, please <a href="%s">read the FAQ</a> about possible CSS fixes.', 'wootheme-testimonials-to-testimonials' ), 'https://nodedesk.zendesk.com/hc/en-us/articles/202244392-Major-Changes-Since-2-10-0' );
 
 		aihr_notice_updated( $text );
 	}

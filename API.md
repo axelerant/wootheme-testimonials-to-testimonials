@@ -56,4 +56,4 @@ The [WooTheme Testimonials to Testimonials plugin](http://wordpress.org/plugins/
 
 ## Need More?
 
-Further examples and more can be found by reading and searching the [WooTheme Testimonials to Testimonials Knowledge Base](https://aihrus.zendesk.com/categories/20104507-Testimonials-Widget) and [source code](https://github.com/michael-cannon/wootheme-testimonials-to-testimonials).
+Further examples and more can be found by reading and searching the [source code](https://github.com/michael-cannon/wootheme-testimonials-to-testimonials).

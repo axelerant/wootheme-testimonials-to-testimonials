@@ -24,7 +24,7 @@ If you find an issue, [let us know here](https://github.com/michael-cannon/wooth
 
 ## Support
 
-This is a developer's portal for WooTheme Testimonials to Testimonials by Michael Cannon and should not be used for support. Please visit the [WooTheme Testimonials to Testimonials Knowledge Base](https://aihrus.zendesk.com/categories/20104507-Testimonials-Widget) for frequently asked questions, offering ideas, or getting support.
+This is a developer's portal for WooTheme Testimonials to Testimonials by Michael Cannon and should not be used for support. Please visit the [WooTheme Testimonials to Testimonials Knowledge Base](https://nodedesk.zendesk.com/hc/en-us/articles/202294892-Testimonials-Widget) for frequently asked questions, offering ideas, or getting support.
 
 ## Contributions
 
@@ -34,7 +34,7 @@ There are various ways you can contribute:
 
 * [Raise an issue](https://github.com/michael-cannon/wootheme-testimonials-to-testimonials/issues) on GitHub.
 * Send us a Pull Request with your bug fixes and/or new features.
-* [Translate WooTheme Testimonials to Testimonials by Michael Cannon into different languages](https://aihrus.zendesk.com/entries/23691557-How-do-I-change-Testimonials-Widget-text-labels-).
+* [Translate WooTheme Testimonials to Testimonials by Michael Cannon into different languages](https://nodedesk.zendesk.com/hc/en-us/articles/202294892-How-do-I-change-Testimonials-Widget-text-labels-).
 * Provide feedback and [suggestions on enhancements](https://github.com/michael-cannon/wootheme-testimonials-to-testimonials/issues?direction=desc&labels=Enhancement&page=1&sort=created&state=open).
 
 ## Thank You

@@ -1,6 +1,10 @@
-# CHANGELOG WooTheme Testimonials to Testimonials by Aihrus
+# CHANGELOG WooTheme Testimonials to Testimonials by Axelerant
 
 ## master
+
+## 1.2.0RC1
+* Change brand name
+* Change copyright text
 
 ## 1.1.2
 * Require Aihrus 1.1.0
