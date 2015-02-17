@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Testimonials – WooTheme Testimonials Migrator
  * Plugin URI: http://wordpress.org/plugins/wootheme-testimonials-to-testimonials/
- * Description: Migrate WooTheme Testimonials entries to Testimonials by Axelerant custom post types.
+ * Description: Migrate WooTheme Testimonials entries to Testimonials custom post types.
  * Version: 1.2.0RC1
  * Author: Axelerant
  * Author URI: http://axelerant.com/
@@ -30,10 +30,10 @@ define( 'WTT2T_BASE', plugin_basename( __FILE__ ) );
 define( 'WTT2T_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WTT2T_DIR_INC', WTT2T_DIR . 'includes/' );
 define( 'WTT2T_DIR_LIB', WTT2T_DIR_INC . 'libraries/' );
-define( 'WTT2T_NAME', 'WooTheme Testimonials to Testimonials by Axelerant' );
+define( 'WTT2T_NAME', 'WooTheme Testimonials to Testimonials' );
 define( 'WTT2T_REQ_BASE', 'testimonials-widget/testimonials-widget.php' );
 define( 'WTT2T_REQ_BASE_PREM', 'testimonials-widget-premium/testimonials-widget-premium.php' );
-define( 'WTT2T_REQ_NAME', 'Testimonials by Axelerant' );
+define( 'WTT2T_REQ_NAME', 'Testimonials' );
 define( 'WTT2T_REQ_SLUG', 'testimonials-widget' );
 define( 'WTT2T_REQ_VERSION', '2.19.0' );
 define( 'WTT2T_VERSION', '1.1.2' );

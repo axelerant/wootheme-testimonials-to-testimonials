@@ -1,4 +1,4 @@
-# CHANGELOG WooTheme Testimonials to Testimonials by Axelerant
+# CHANGELOG WooTheme Testimonials to Testimonials
 
 ## master
 
