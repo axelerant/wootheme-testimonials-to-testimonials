@@ -1,10 +1,12 @@
-# CHANGELOG WooTheme Testimonials to Testimonials
+# CHANGELOG WooTheme Testimonials to Testimonials Widget
 
 ## master
 
 ## 1.2.0RC1
-* Change brand name
-* Change copyright text
+* Change branding from Aihrus to Axelerant
+* Update copyright text
+* Update plugin name
+* Update PHPCS to WordPress Core
 
 ## 1.1.2
 * Require Aihrus 1.1.0
