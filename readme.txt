@@ -1,6 +1,6 @@
 === WooTheme Testimonials to Testimonials ===
 
-Contributors: comprock
+Contributors: comprock, saurabhd
 Tags: woothemes, migration, convert, testimonials, testimonials widget
 Requires at least: 3.6
 Tested up to: 3.9.0
@@ -13,7 +13,7 @@ Migrate WooTheme Testimonials entries to Testimonials custom post types.
 
 == Description ==
 
-Migrate WooTheme Testimonials entries to Testimonials custom post types for use by the best WordPress testimonials plugin there is, [Testimonials by Axelerant](http://wordpress.org/extend/plugins/testimonials-widget/).
+Migrate WooTheme Testimonials entries to Testimonials custom post types for use by the best WordPress testimonials plugin there is, [Testimonials Widget](http://wordpress.org/extend/plugins/testimonials-widget/).
 
 = Primary Features =
 
