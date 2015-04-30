@@ -2,7 +2,7 @@
 
 ## master
 
-## 1.2.0RC1
+## 1.2.0
 * Change branding from Aihrus to Axelerant
 * Update copyright text
 * Update plugin name

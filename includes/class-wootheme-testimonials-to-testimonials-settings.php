@@ -260,8 +260,8 @@ function wtt2t_get_options() {
 function wtt2t_get_option( $option, $default = null ) {
 	$options = get_option( Wootheme_Testimonials_to_Testimonials_Settings::ID, null );
 
-	if ( isset( $options[$option] ) )
-		return $options[$option];
+	if ( isset( $options[ $option ] ) )
+		return $options[ $option ];
 	else
 		return $default;
 }
@@ -273,7 +273,7 @@ function wtt2t_set_option( $option, $value = null ) {
 	if ( ! is_array( $options ) )
 		$options = array();
 
-	$options[$option] = $value;
+	$options[ $option ] = $value;
 	update_option( Wootheme_Testimonials_to_Testimonials_Settings::ID, $options );
 }
 

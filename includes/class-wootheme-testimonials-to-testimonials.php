@@ -119,7 +119,7 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 			return;
 
 		global $wpdb;
-		
+
 		require_once WTT2T_DIR_INC . 'class-wootheme-testimonials-to-testimonials-settings.php';
 
 		$delete_data = wtt2t_get_option( 'delete_data', false );
@@ -222,7 +222,7 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 
 		$include_ids = wtt2t_get_option( 'posts_to_import' );
 		if ( $include_ids ) {
-			$query[ 'post__in' ] = str_getcsv( $include_ids );
+			$query['post__in'] = str_getcsv( $include_ids );
 		} else {
 			$query['posts_per_page'] = 1;
 			$query['meta_query']     = array(
