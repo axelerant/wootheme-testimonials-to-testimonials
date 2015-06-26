@@ -2,7 +2,7 @@
 
 ## master
 
-## 1.2.1RC1
+## 1.2.1
 * Update store branding
 
 ## 1.2.0
