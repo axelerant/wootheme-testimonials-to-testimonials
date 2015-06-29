@@ -16,8 +16,9 @@
 require_once WTT2T_DIR_INC . 'class-wootheme-testimonials-to-testimonials-settings.php';
 require_once WTT2T_DIR_LIB_ALT . 'aihrus-framework/includes/class-aihrus-common.php';
 
-if ( class_exists( 'Wootheme_Testimonials_to_Testimonials' ) )
+if ( class_exists( 'Wootheme_Testimonials_to_Testimonials' ) ) {
 	return;
+}
 
 
 class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
@@ -103,20 +104,23 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 
 
 	public static function activation() {
-		if ( ! current_user_can( 'activate_plugins' ) )
+		if ( ! current_user_can( 'activate_plugins' ) ) {
 			return;
+		}
 	}
 
 
 	public static function deactivation() {
-		if ( ! current_user_can( 'activate_plugins' ) )
+		if ( ! current_user_can( 'activate_plugins' ) ) {
 			return;
+		}
 	}
 
 
 	public static function uninstall() {
-		if ( ! current_user_can( 'activate_plugins' ) )
+		if ( ! current_user_can( 'activate_plugins' ) ) {
 			return;
+		}
 
 		global $wpdb;
 
@@ -131,20 +135,23 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 
 
 	public static function plugin_row_meta( $input, $file ) {
-		if ( self::BASE != $file )
+		if ( self::BASE != $file ) {
 			return $input;
+		}
 
 		$disable_donate = tw_get_option( 'disable_donate' );
-		if ( $disable_donate )
+		if ( $disable_donate ) {
 			return $input;
+		}
 
 		$links = array(
 			self::$donate_link,
 		);
 
 		global $TW_Premium;
-		if ( ! isset( $TW_Premium ) )
+		if ( ! isset( $TW_Premium ) ) {
 			$links[] = TW_PREMIUM_LINK;
+		}
 
 		$input = array_merge( $input, $links );
 
@@ -167,8 +174,9 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 	 */
 	public static function user_interface() {
 		// Capability check
-		if ( ! current_user_can( 'manage_options' ) )
+		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die( self::$post_id, esc_html__( "Your user account doesn't have permission to access this.", 'wootheme-testimonials-to-testimonials' ) );
+		}
 
 ?>
 
@@ -179,31 +187,31 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 	<h2><?php _e( 'WooTheme Testimonials to Testimonials Migrator', 'wootheme-testimonials-to-testimonials' ); ?></h2>
 
 <?php
-		// If the button was clicked
-		if ( ! empty( $_POST[ self::ID ] ) || ! empty( $_REQUEST['posts'] ) ) {
-			// Form nonce check
-			check_admin_referer( self::ID );
+// If the button was clicked
+if ( ! empty( $_POST[ self::ID ] ) || ! empty( $_REQUEST['posts'] ) ) {
+	// Form nonce check
+	check_admin_referer( self::ID );
 
-			// Create the list of image IDs
-			if ( ! empty( $_REQUEST['posts'] ) ) {
-				$posts = explode( ',', trim( $_REQUEST['posts'], ',' ) );
-				$posts = array_map( 'intval', $posts );
-			} else {
-				$posts = self::get_posts_to_process();
-			}
+	// Create the list of image IDs
+	if ( ! empty( $_REQUEST['posts'] ) ) {
+		$posts = explode( ',', trim( $_REQUEST['posts'], ',' ) );
+		$posts = array_map( 'intval', $posts );
+	} else {
+		$posts = self::get_posts_to_process();
+	}
 
-			$count = count( $posts );
-			if ( ! $count ) {
-				echo '	<p>' . _e( 'All done. No posts needing processing found.', 'wootheme-testimonials-to-testimonials' ) . '</p></div>';
-				return;
-			}
+	$count = count( $posts );
+	if ( ! $count ) {
+		echo '	<p>' . _e( 'All done. No posts needing processing found.', 'wootheme-testimonials-to-testimonials' ) . '</p></div>';
+		return;
+	}
 
-			$posts = implode( ',', $posts );
-			self::show_status( $count, $posts );
-		} else {
-			// No button click? Display the form.
-			self::show_greeting();
-		}
+	$posts = implode( ',', $posts );
+	self::show_status( $count, $posts );
+} else {
+	// No button click? Display the form.
+	self::show_greeting();
+}
 ?>
 	</div>
 <?php
@@ -236,17 +244,20 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 		}
 
 		$skip_ids = wtt2t_get_option( 'skip_importing_post_ids' );
-		if ( $skip_ids )
-			$query[ 'post__not_in' ] = str_getcsv( $skip_ids );
+		if ( $skip_ids ) {
+			$query['post__not_in'] = str_getcsv( $skip_ids );
+		}
 
 		$results  = new WP_Query( $query );
 		$query_wp = $results->request;
 
 		$limit = wtt2t_get_option( 'limit' );
-		if ( $limit )
+		if ( $limit ) {
 			$query_wp = preg_replace( '#\bLIMIT 0,.*#', 'LIMIT 0,' . $limit, $query_wp );
-		else
+		}
+		else {
 			$query_wp = preg_replace( '#\bLIMIT 0,.*#', '', $query_wp );
+		}
 
 		$posts = $wpdb->get_col( $query_wp );
 
@@ -318,8 +329,8 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 		<li style="display:none"></li>
 	</ol>
 
-	<script type="text/javascript">
-	// <![CDATA[
+		<script type="text/javascript">
+		// <![CDATA[
 		jQuery(document).ready(function($){
 			var i;
 			var rt_posts = [<?php echo esc_attr( $posts ); ?>];
@@ -388,43 +399,43 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 			function WPSPosts( id ) {
 				$.ajax({
 					type: 'POST',
-					url: ajaxurl,
-					data: {
-						action: "ajax_process_post",
-						id: id
-					},
-					success: function( response ) {
-						if ( response.success ) {
-							WPSPostsUpdateStatus( id, true, response );
-						}
-						else {
-							WPSPostsUpdateStatus( id, false, response );
-						}
+						url: ajaxurl,
+						data: {
+							action: "ajax_process_post",
+								id: id
+						},
+						success: function( response ) {
+							if ( response.success ) {
+								WPSPostsUpdateStatus( id, true, response );
+							}
+							else {
+								WPSPostsUpdateStatus( id, false, response );
+							}
 
-						if ( rt_posts.length && rt_continue ) {
-							WPSPosts( rt_posts.shift() );
-						}
-						else {
-							WPSPostsFinishUp();
-						}
-					},
-					error: function( response ) {
-						WPSPostsUpdateStatus( id, false, response );
+							if ( rt_posts.length && rt_continue ) {
+								WPSPosts( rt_posts.shift() );
+							}
+							else {
+								WPSPostsFinishUp();
+							}
+						},
+							error: function( response ) {
+								WPSPostsUpdateStatus( id, false, response );
 
-						if ( rt_posts.length && rt_continue ) {
-							WPSPosts( rt_posts.shift() );
-						}
-						else {
-							WPSPostsFinishUp();
-						}
-					}
+								if ( rt_posts.length && rt_continue ) {
+									WPSPosts( rt_posts.shift() );
+								}
+								else {
+									WPSPostsFinishUp();
+								}
+							}
 				});
 			}
 
 			WPSPosts( rt_posts.shift() );
 		});
-	// ]]>
-	</script>
+		// ]]>
+		</script>
 <?php
 	}
 	// @codingStandardsIgnoreEnd
@@ -442,14 +453,17 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 		self::$post_id = intval( $_REQUEST['id'] );
 
 		$post = get_post( self::$post_id, ARRAY_A );
-		if ( ! $post || ! in_array( $post['post_type'], self::$post_types )  )
+		if ( ! $post || ! in_array( $post['post_type'], self::$post_types )  ) {
 			die( json_encode( array( 'error' => sprintf( esc_html__( 'Failed Migration: %s is incorrect post type.', 'wootheme-testimonials-to-testimonials' ), esc_html( self::$post_id ) ) ) ) );
+		}
 
 		$result = self::migrate_item( self::$post_id, $post );
-		if ( is_numeric( $result ) )
+		if ( is_numeric( $result ) ) {
 			die( json_encode( array( 'success' => sprintf( __( '&quot;<a href="%1$s" target="_blank">%2$s</a>&quot; WooTheme Testimonial ID %3$s was successfully migrated to Testimonials %6$s &quot;<a href="%4$s" target="_blank">%5$s</a>&quot;.', 'wootheme-testimonials-to-testimonials' ), get_permalink( self::$post_id ), esc_html( get_the_title( self::$post_id ) ), self::$post_id, get_permalink( $result ), esc_html( get_the_title( $result ) ), $result ) ) ) );
-		else
+		}
+		else {
 			die( json_encode( array( 'error' => sprintf( __( '&quot;<a href="%1$s" target="_blank">%2$s</a>&quot; Unable to be migrated.', 'wootheme-testimonials-to-testimonials' ), get_permalink( self::$post_id ), esc_html( get_the_title( self::$post_id ) ) ) ) ) );
+		}
 	}
 
 
@@ -492,31 +506,37 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 			'_url' => 'testimonials-widget-url',
 		);
 		foreach ( $fields as $field => $target ) {
-			if ( isset( $post_meta[ $field ][ 0 ] ) )
-				add_post_meta( $new_post_id, $target, $post_meta[ $field ][ 0 ] );
+			if ( isset( $post_meta[ $field ][0] ) ) {
+				add_post_meta( $new_post_id, $target, $post_meta[ $field ][0] );
+			}
 		}
 
 		$categories = wp_get_object_terms( $post_id, 'testimonial-category' );
 		if ( ! empty( $categories ) ) {
 			$use_cpt_taxonomy = tw_get_option( 'use_cpt_taxonomy', false );
-			if ( ! $use_cpt_taxonomy )
+			if ( ! $use_cpt_taxonomy ) {
 				$tax_cat = 'category';
-			else
+			}
+			else {
 				$tax_cat = Testimonials_Widget::$cpt_category;
+			}
 
 			foreach ( $categories as $category ) {
 				$term = term_exists( $category->name, $tax_cat );
-				if ( ! is_array( $term ) )
+				if ( ! is_array( $term ) ) {
 					$term = wp_insert_term( $category->name, $tax_cat );
+				}
 
-				if ( ! is_array( $term ) )
+				if ( ! is_array( $term ) ) {
 					continue;
+				}
 
 				$term_id = intval( $term['term_id'] );
-				if ( $term_id )
+				if ( $term_id ) {
 					wp_set_object_terms( $new_post_id, $term_id, $tax_cat, true );
+				}
 			}
-		}	
+		}
 
 		$thumbnail_id = get_post_meta( $post_id, '_thumbnail_id', true );
 		if ( $thumbnail_id ) {
@@ -552,8 +572,9 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 	public static function update() {
 		$prior_version = wtt2t_get_option( 'admin_notices' );
 		if ( $prior_version ) {
-			if ( $prior_version < '1.0.0' )
+			if ( $prior_version < '1.0.0' ) {
 				add_action( 'admin_notices', array( __CLASS__, 'notice_1_0_0' ) );
+			}
 
 			if ( $prior_version < self::VERSION ) {
 				do_action( 'wtt2t_update' );
@@ -634,10 +655,12 @@ class Wootheme_Testimonials_to_Testimonials extends Aihrus_Common {
 
 
 	public static function get_defaults( $single_view = false ) {
-		if ( empty( $single_view ) )
+		if ( empty( $single_view ) ) {
 			return apply_filters( 'wtt2t_defaults', wtt2t_get_options() );
-		else
+		}
+		else {
 			return apply_filters( 'wtt2t_defaults_single', wtt2t_get_options() );
+		}
 	}
 
 
