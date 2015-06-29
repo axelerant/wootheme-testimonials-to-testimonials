@@ -64,20 +64,24 @@ add_action( 'plugins_loaded', 'wootheme_testimonials_to_testimonials_init', 99 )
  */
 if ( ! function_exists( 'wootheme_testimonials_to_testimonials_init' ) ) {
 	function wootheme_testimonials_to_testimonials_init() {
-		if ( ! is_admin() )
+		if ( ! is_admin() ) {
 			return;
+		}
 
-		if ( ! function_exists( 'add_screen_meta_link' ) )
+		if ( ! function_exists( 'add_screen_meta_link' ) ) {
 			require_once WTT2T_DIR_LIB . 'screen-meta-links.php';
+		}
 
 		if ( Wootheme_Testimonials_to_Testimonials::version_check() ) {
 			global $Wootheme_Testimonials_to_Testimonials;
-			if ( is_null( $Wootheme_Testimonials_to_Testimonials ) )
+			if ( is_null( $Wootheme_Testimonials_to_Testimonials ) ) {
 				$Wootheme_Testimonials_to_Testimonials = new Wootheme_Testimonials_to_Testimonials();
+			}
 
 			global $Wootheme_Testimonials_to_Testimonials_Settings;
-			if ( is_null( $Wootheme_Testimonials_to_Testimonials_Settings ) )
+			if ( is_null( $Wootheme_Testimonials_to_Testimonials_Settings ) ) {
 				$Wootheme_Testimonials_to_Testimonials_Settings = new Wootheme_Testimonials_to_Testimonials_Settings();
+			}
 		}
 	}
 }
