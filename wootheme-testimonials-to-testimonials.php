@@ -3,7 +3,7 @@
  * Plugin Name: Testimonials Widget – WooTheme Testimonials Migrator
  * Plugin URI: http://wordpress.org/plugins/wootheme-testimonials-to-testimonials/
  * Description: Migrate WooTheme Testimonials entries to Testimonials custom post types.
- * Version: 1.2.1
+ * Version: 1.3.0RC1
  * Author: Axelerant
  * Author URI: https://axelerant.com/
  * License: GPLv2 or later
@@ -33,6 +33,7 @@ define( 'WTT2T_DIR_LIB', WTT2T_DIR_INC . 'libraries/' );
 define( 'WTT2T_NAME', 'WooTheme Testimonials to Testimonials' );
 define( 'WTT2T_REQ_BASE', 'testimonials-widget/testimonials-widget.php' );
 define( 'WTT2T_REQ_BASE_PREM', 'testimonials-widget-premium/testimonials-widget-premium.php' );
+define( 'WTT2T_REQ_CLASS', 'Testimonials_Widget' );
 define( 'WTT2T_REQ_NAME', 'Testimonials Widget' );
 define( 'WTT2T_REQ_SLUG', 'testimonials-widget' );
 define( 'WTT2T_REQ_VERSION', '3.2.0' );
@@ -45,10 +46,6 @@ if ( defined( 'TW_DIR_LIB' ) ) {
 }
 
 require_once WTT2T_DIR_INC . 'requirements.php';
-
-if ( ! wtt2t_requirements_check() ) {
-	return false;
-}
 
 require_once WTT2T_DIR_INC . 'class-wootheme-testimonials-to-testimonials.php';
 
@@ -66,6 +63,10 @@ if ( ! function_exists( 'wootheme_testimonials_to_testimonials_init' ) ) {
 	function wootheme_testimonials_to_testimonials_init() {
 		if ( ! is_admin() ) {
 			return;
+		}
+
+		if ( ! wtt2t_requirements_check() ) {
+			return false;
 		}
 
 		if ( ! function_exists( 'add_screen_meta_link' ) ) {
