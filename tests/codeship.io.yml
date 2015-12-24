@@ -10,7 +10,7 @@ pear install phpmd/PHP_PMD
 phpenv rehash
 git clone -b master https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git $(pear config-get php_dir)/PHP/CodeSniffer/Standards/wpcs
 phpcs --config-set installed_paths $(pear config-get php_dir)/PHP/CodeSniffer/Standards/wpcs
-export PHPMD_EXCLUDE="/includes/libraries/"
+export PHPMD_EXCLUDE="/includes/libraries/,jquery-ui-1.10.3.custom.min.css,jquery.ui.progressbar.js"
 # export WP_TESTS_DIR=/tmp/wordpress-tests/
 # bash tests/bin/install-wp-tests.sh wordpress_test root '' ${WP_VERSION}
 
