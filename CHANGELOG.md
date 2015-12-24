@@ -2,6 +2,12 @@
 
 ## master
 
+## 1.3.0RC2
+* Remove activation helpers
+* Confirm WordPress 4.4 compatibility
+* Fix coding standards for CI.
+* Remove `ProjectStatus` button by stillmaintained.com from readme file.
+
 ## 1.2.1
 * Update store branding
 
