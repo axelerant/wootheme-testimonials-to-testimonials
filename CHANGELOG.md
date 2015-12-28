@@ -2,6 +2,10 @@
 
 ## master
 
+## 1.3.0RC1
+* Changed Requered Testimonials_Widget class to Axl_Testimonials_Widget
+* Removed activation helpers
+
 ## 1.2.1
 * Update store branding
 
