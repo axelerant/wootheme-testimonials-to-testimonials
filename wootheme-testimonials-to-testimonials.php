@@ -33,11 +33,11 @@ define( 'WTT2T_DIR_LIB', WTT2T_DIR_INC . 'libraries/' );
 define( 'WTT2T_NAME', 'WooTheme Testimonials to Testimonials' );
 define( 'WTT2T_REQ_BASE', 'testimonials-widget/testimonials-widget.php' );
 define( 'WTT2T_REQ_BASE_PREM', 'testimonials-widget-premium/testimonials-widget-premium.php' );
-define( 'WTT2T_REQ_CLASS', 'Testimonials_Widget' );
+define( 'WTT2T_REQ_CLASS', 'Axl_Testimonials_Widget' );
 define( 'WTT2T_REQ_NAME', 'Testimonials Widget' );
 define( 'WTT2T_REQ_SLUG', 'testimonials-widget' );
-define( 'WTT2T_REQ_VERSION', '3.2.0' );
-define( 'WTT2T_VERSION', '1.2.1' );
+define( 'WTT2T_REQ_VERSION', '3.2.1RC7' );
+define( 'WTT2T_VERSION', '1.3.0RC1' );
 
 if ( defined( 'TW_DIR_LIB' ) ) {
 	define( 'WTT2T_DIR_LIB_ALT', TW_DIR_LIB );
