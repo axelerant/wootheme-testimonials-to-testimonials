@@ -254,8 +254,7 @@ if ( ! empty( $_POST[ self::ID ] ) || ! empty( $_REQUEST['posts'] ) ) {
 		$limit = wtt2t_get_option( 'limit' );
 		if ( $limit ) {
 			$query_wp = preg_replace( '#\bLIMIT 0,.*#', 'LIMIT 0,' . $limit, $query_wp );
-		}
-		else {
+		} else {
 			$query_wp = preg_replace( '#\bLIMIT 0,.*#', '', $query_wp );
 		}
 
@@ -460,8 +459,7 @@ if ( ! empty( $_POST[ self::ID ] ) || ! empty( $_REQUEST['posts'] ) ) {
 		$result = self::migrate_item( self::$post_id, $post );
 		if ( is_numeric( $result ) ) {
 			die( json_encode( array( 'success' => sprintf( __( '&quot;<a href="%1$s" target="_blank">%2$s</a>&quot; WooTheme Testimonial ID %3$s was successfully migrated to Testimonials %6$s &quot;<a href="%4$s" target="_blank">%5$s</a>&quot;.', 'wootheme-testimonials-to-testimonials' ), get_permalink( self::$post_id ), esc_html( get_the_title( self::$post_id ) ), self::$post_id, get_permalink( $result ), esc_html( get_the_title( $result ) ), $result ) ) ) );
-		}
-		else {
+		} else {
 			die( json_encode( array( 'error' => sprintf( __( '&quot;<a href="%1$s" target="_blank">%2$s</a>&quot; Unable to be migrated.', 'wootheme-testimonials-to-testimonials' ), get_permalink( self::$post_id ), esc_html( get_the_title( self::$post_id ) ) ) ) ) );
 		}
 	}
@@ -516,8 +514,7 @@ if ( ! empty( $_POST[ self::ID ] ) || ! empty( $_REQUEST['posts'] ) ) {
 			$use_cpt_taxonomy = tw_get_option( 'use_cpt_taxonomy', false );
 			if ( ! $use_cpt_taxonomy ) {
 				$tax_cat = 'category';
-			}
-			else {
+			} else {
 				$tax_cat = Testimonials_Widget::$cpt_category;
 			}
 
@@ -657,8 +654,7 @@ if ( ! empty( $_POST[ self::ID ] ) || ! empty( $_REQUEST['posts'] ) ) {
 	public static function get_defaults( $single_view = false ) {
 		if ( empty( $single_view ) ) {
 			return apply_filters( 'wtt2t_defaults', wtt2t_get_options() );
-		}
-		else {
+		} else {
 			return apply_filters( 'wtt2t_defaults_single', wtt2t_get_options() );
 		}
 	}
